@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Are You Ready?</title>
+<title>valentine day</title>
 
 <style>
 body{
@@ -28,6 +28,37 @@ button{
   color:#fff;
   cursor:pointer;
   transition:transform 0.35s ease;
+}
+
+#bgAnimation{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  z-index:0;          /* sabse peeche */
+  pointer-events:none;
+}
+
+/* saari main cheeze upar rahengi */
+.page, #popup{
+  position:relative;
+  z-index:5;
+}
+
+.fall{
+  position:absolute;
+  top:-50px;
+  font-size:22px;
+  opacity:0.35;
+  animation:fall linear forwards;
+}
+
+@keyframes fall{
+  from{
+    transform:translateY(0) rotate(0deg);
+  }
+  to{
+    transform:translateY(110vh) rotate(360deg);
+  }
 }
 
 #noBtn{
@@ -90,11 +121,12 @@ button{
 }
 .heart{
   position:fixed;
+  font-size:38px;
   left:50%;
   top:50%;
   font-size:24px;
   pointer-events:none;
-  animation:burst 1.2s ease-out forwards;
+  animation:burst 2.0s ease-out forwards;
 }
 
 @keyframes burst{
@@ -105,8 +137,8 @@ button{
   to{
     transform:
       translate(calc(-50% + var(--x)), calc(-50% + var(--y)))
-      scale(1.6);
-    opacity:0;
+      scale(2.8);
+    opacity:0.5;
   }
 }
 </style>
@@ -114,34 +146,55 @@ button{
 
 <body>
 
-<audio id="loveSong" src="i-think-they-call-this-love-cover_yL7X4JrK.mp3" loop></audio>
+<audio id="loveSong" src="C:\Users\Achyut Detroja\Downloads\i-think-they-call-this-love-cover_yL7X4JrK.mp3" loop></audio>
+
+<div id="bgAnimation"></div>
 
 <div id="page1" class="page active">
-  <h1>Cutie, are you ready? 💗</h1>
-  <button onclick="goNext()">Ofcourse yes ❤️</button>
+  <h1>Cutie, are you ready?😺</h1>
+  <button onclick="goNext()">Ofcourse yes👀</button>
 </div>
 
 <div id="page2" class="page">
-  <h1>Happy Valentine Day 💘</h1>
-  <button onclick="openPopup()">Thank You ❤️</button>
+  <h1>Happy Valentine Day🌹❤️</h1>
+  <button onclick="openPopup()">Thank You🫣</button>
 </div>
 
 <div id="popup">
   <div id="popupBox">
-    <h2 id="popupQuestion">Would you like to be my Valentine? 💖</h2>
+    <h2 id="popupQuestion">Would you like to be my Valentine?👉🏻👈🏻</h2>
 
     <div id="btnArea">
-      <button id="yesBtn" onclick="finalYes()">Yes 💕</button>
-      <button id="noBtn" onclick="pressNo()">No 😌</button>
+      <button id="yesBtn" onclick="finalYes()">Yes😘💕</button>
+      <button id="noBtn" onclick="pressNo()">No😠😏</button>
     </div>
   </div>
 </div>
 
 <div id="finalPage" class="page">
-  <h1>Ab officially… tum meri Valentine ho ❤️😉</h1>
+  <h1>Ab Officially....tum meri Valentine ho👩🏻‍❤️‍💋‍👨🏻😉</h1>
 </div>
 
 <script>
+const emojis = ["💞","🌷","💋","✨","🧿","🧸","🎀"];
+
+function createFall(){
+  const el = document.createElement("div");
+  el.className = "fall";
+  el.innerText = emojis[Math.floor(Math.random()*emojis.length)];
+
+  el.style.left = Math.random()*100 + "vw";
+  el.style.animationDuration = (6 + Math.random()*6) + "s";
+  el.style.fontSize = (18 + Math.random()*12) + "px";
+
+  document.getElementById("bgAnimation").appendChild(el);
+
+  setTimeout(()=>el.remove(),12000);
+}
+
+/* continuous soft rain */
+setInterval(createFall, 600);
+
 function goNext(){
   page1.classList.remove("active");
   page2.classList.add("active");
@@ -166,7 +219,7 @@ function openPopup(){
   noBtn.className = "";
   noBtn.style.display = "inline-block";
 
-  popupQuestion.innerText = "Would you like to be my Valentine? 💖";
+  popupQuestion.innerText = "Would you like to be my Valentine?👉🏻👈🏻";
 }
 
 function pressNo(){
@@ -178,10 +231,10 @@ function pressNo(){
   }
 
   const lines = [
-    "Ek baar phir soch lo 🥺",
-    "Sach bolun? YES bolne me zyada maza hai 🙂💘",
-    "Itna bhaav achha nahi 😏",
-    "Ab bas YES hi bacha hai 😌"
+    "Ek baar phir soch lo🥺",
+    "Sach bolun? YES bolne me zyada maza hai🌝",
+    "Itna bhaav achha nahi😏",
+    "Ab bas YES hi bacha hai😋"
   ];
 
   popupQuestion.innerText =
@@ -216,7 +269,7 @@ function finalYes(){
 }
 
 function heartBurst(){
-  const hearts = ["❤️","💖","💘","💕","💓"];
+  const hearts = ["🧿","🌸","💘","💕","🎀"];
 
   for(let i=0;i<30;i++){
     const heart = document.createElement("div");
@@ -250,4 +303,3 @@ function fadeInAudio(audio){
 
 </body>
 </html>
-
