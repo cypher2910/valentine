@@ -114,6 +114,8 @@ button{
 
 <body>
 
+<audio id="loveSong" src=""C:\Users\Achyut Detroja\Downloads\i-think-they-call-this-love-cover_yL7X4JrK.mp3"" loop></audio>
+
 <div id="page1" class="page active">
   <h1>Cutie, are you ready? 💗</h1>
   <button onclick="goNext()">Ofcourse yes ❤️</button>
@@ -207,6 +209,10 @@ function finalYes(){
   finalPage.classList.add("active");
 
   heartBurst();
+
+  const song = document.getElementById("loveSong");
+  song.currentTime = 0;
+  fadeInAudio(song);
 }
 
 function heartBurst(){
@@ -224,6 +230,22 @@ function heartBurst(){
     setTimeout(()=>heart.remove(),1200);
   }
 }
+
+function fadeInAudio(audio){
+  audio.volume = 0;
+  audio.play();
+
+  let vol = 0;
+  const fade = setInterval(()=>{
+    vol += 0.02;
+    if(vol >= 0.6){
+      vol = 0.6;      // max volume (soft hi rahe)
+      clearInterval(fade);
+    }
+    audio.volume = vol;
+  }, 100);
+}
+
 </script>
 
 </body>
