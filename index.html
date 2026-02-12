@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,6 +87,27 @@ button{
   top:50%;
   transform:translate(120px, -50%) scale(1);
   z-index:1;
+}
+.heart{
+  position:fixed;
+  left:50%;
+  top:50%;
+  font-size:24px;
+  pointer-events:none;
+  animation:burst 1.2s ease-out forwards;
+}
+
+@keyframes burst{
+  from{
+    transform:translate(-50%, -50%) scale(0.4);
+    opacity:1;
+  }
+  to{
+    transform:
+      translate(calc(-50% + var(--x)), calc(-50% + var(--y)))
+      scale(1.6);
+    opacity:0;
+  }
 }
 </style>
 </head>
@@ -183,6 +205,24 @@ function finalYes(){
   popup.style.display="none";
   page2.classList.remove("blur","active");
   finalPage.classList.add("active");
+
+  heartBurst();
+}
+
+function heartBurst(){
+  const hearts = ["❤️","💖","💘","💕","💓"];
+
+  for(let i=0;i<30;i++){
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = hearts[Math.floor(Math.random()*hearts.length)];
+
+    heart.style.setProperty("--x",(Math.random()*400 - 200) + "px");
+    heart.style.setProperty("--y",(Math.random()*400 - 200) + "px");
+
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),1200);
+  }
 }
 </script>
 
